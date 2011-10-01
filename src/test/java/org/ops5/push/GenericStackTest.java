@@ -18,7 +18,8 @@ package org.ops5.push;
 
 import java.util.Vector;
 import junit.framework.TestCase;
-import org.ops5.push.GenericStack;
+import org.ops5.push.engine.GenericStack;
+
 
 public class GenericStackTest extends TestCase
 {

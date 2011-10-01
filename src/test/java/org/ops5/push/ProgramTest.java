@@ -17,7 +17,8 @@
 package org.ops5.push;
 
 import junit.framework.*;
-import org.ops5.push.*;
+import org.ops5.push.engine.Program;
+
 
 public class ProgramTest extends TestCase {
 	@SuppressWarnings("deprecation")

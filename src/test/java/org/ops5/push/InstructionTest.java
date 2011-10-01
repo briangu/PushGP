@@ -17,7 +17,13 @@
 package org.ops5.push;
 
 import junit.framework.TestCase;
-import org.ops5.push.*;
+import org.ops5.push.engine.Interpreter;
+import org.ops5.push.engine.ObjectStack;
+import org.ops5.push.engine.Program;
+import org.ops5.push.engine.booleanStack;
+import org.ops5.push.engine.floatStack;
+import org.ops5.push.engine.intStack;
+
 
 /**
  *

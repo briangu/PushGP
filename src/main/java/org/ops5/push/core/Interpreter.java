@@ -17,6 +17,7 @@
 package org.ops5.push.core;
 
 
+import com.sun.org.apache.xml.internal.serializer.utils.BoolStack;
 import java.io.Serializable;
 import java.util.*;
 
@@ -180,6 +181,55 @@ public class Interpreter implements Serializable
 
     _generators.put("float.erc", new FloatAtomGenerator());
     _generators.put("integer.erc", new IntAtomGenerator());
+  }
+
+  public Interpreter clone()
+  {
+    Interpreter clone = new Interpreter();
+
+    clone._instructions = _instructions;
+
+    clone._generators = _generators;
+    clone._randomGenerators = _randomGenerators;
+
+    // Create the stacks.
+    clone._intStack = new intStack();
+    clone._floatStack = new floatStack();
+    clone._boolStack = new booleanStack();
+    clone._codeStack = new ObjectStack();
+    clone._nameStack = new ObjectStack();
+    clone._execStack = new ObjectStack();
+    clone._inputStack = new ObjectStack();
+
+    clone._customStacks = new ArrayList<Stack>();
+
+    clone._intFrameStack = new ObjectStack();
+    clone._floatFrameStack = new ObjectStack();
+    clone._boolFrameStack = new ObjectStack();
+    clone._codeFrameStack = new ObjectStack();
+    clone._nameFrameStack = new ObjectStack();
+
+    clone._useFrames = _useFrames;
+
+    clone._totalStepsTaken = 0;
+    clone._evaluationExecutions = 0;
+
+    clone._maxRandomInt = _maxRandomInt;
+    clone._minRandomInt = _minRandomInt;
+    clone._randomIntResolution = _randomIntResolution;
+
+    clone._maxRandomFloat = _maxRandomFloat;
+    clone._minRandomFloat = _minRandomFloat;
+    clone._randomFloatResolution = _randomFloatResolution;
+
+    clone._maxRandomCodeSize = _maxRandomCodeSize;
+    clone._maxPointsInProgram = _maxPointsInProgram;
+
+    clone._inputPusher = _inputPusher;
+
+    clone.ClearStacks();
+
+    return clone;
   }
 
   /**

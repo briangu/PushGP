@@ -86,7 +86,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>org.ops5.push.PushGP</mainClass>
+              <mainClass>org.ops5.push.Main</mainClass>
               <packageName>org.ops5.push</packageName>
             </manifest>
           </archive>

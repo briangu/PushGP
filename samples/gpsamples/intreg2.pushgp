@@ -26,7 +26,7 @@
 ### behaviors.
 
 interpreter-class       	= org.ops5.push.core.Interpreter
-inputpusher-class               = org.ops5.push.core.InputPusher
+inputpusher-class         = org.ops5.push.core.InputPusher
 individual-class        	= org.ops5.push.core.PushGPIndividual
 
 ### Setup GP parameters

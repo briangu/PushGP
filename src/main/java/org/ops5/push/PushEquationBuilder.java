@@ -29,7 +29,6 @@ public class PushEquationBuilder
   public static void main(String args[])
       throws Exception
   {
-
     if (args.length != 1)
     {
       System.out.println("Usage: PushEquationBuilder inputfile");

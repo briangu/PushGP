@@ -36,12 +36,12 @@ Get Push
 Run a Push program
 ------------------
 
-    $ java -jar target/pushgp-1.0.0.jar inspect samples/pushsamples/exampleProgram0.push
+    $ java -jar target/push-1.0.0.jar inspect samples/pushsamples/exampleProgram0.push
 
 Evolve a Push program with PushGP
 ---------------------------------
 
-    $ java -jar target/pushgp-1.0.0.jar gp gpsamples/intreg1.pushgp
+    $ java -jar target/push-1.0.0.jar gp samples/gpsamples/intreg1.pushgp
 
 This problem uses integer symbolic regression to solve the equation y = 12x^2 + 5. Other sample problems are available, with descriptions, in `gpsamples/`. For example, `intreg2.pushgp` uses integer symbolic regression to solve the factorial function, and `regression1.pushgp` uses float symbolic regression to solve y = 12x^2 + 5.
 

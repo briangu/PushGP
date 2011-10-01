@@ -17,7 +17,6 @@
 package org.ops5.push.core;
 
 
-import com.sun.org.apache.xml.internal.serializer.utils.BoolStack;
 import java.io.Serializable;
 import java.util.*;
 

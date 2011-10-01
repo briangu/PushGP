@@ -158,7 +158,7 @@ public class CEFloatSymbolicRegression extends PushGP
     // Must be included in order to use the input stack.
     _interpreter.inputStack().push(_currentInput);
 
-    _interpreter.Execute(((PushGPIndividual) inIndividual)._program, _executionLimit);
+    _interpreter.Execute(((PushGPIndividual) inIndividual).Program, _executionLimit);
 
     float result = fstack.top();
 
@@ -253,7 +253,7 @@ public class CEFloatSymbolicRegression extends PushGP
       {
         _bestMeanFitness = i.GetFitness();
         _bestIndividual = n;
-        _bestSize = ((PushGPIndividual) i)._program.programsize();
+        _bestSize = ((PushGPIndividual) i).Program.programsize();
         _bestErrors = i.GetErrors();
       }
     }
@@ -280,16 +280,16 @@ public class CEFloatSymbolicRegression extends PushGP
       madeSimpler = false;
       float method = _RNG.nextInt(100);
 
-      if (trial._program.programsize() <= 0) break;
+      if (trial.Program.programsize() <= 0) break;
       if (method < _simplifyFlattenPercent)
       {
         // Flatten random thing
-        int pointIndex = _RNG.nextInt(trial._program.programsize());
-        Object point = trial._program.Subtree(pointIndex);
+        int pointIndex = _RNG.nextInt(trial.Program.programsize());
+        Object point = trial.Program.Subtree(pointIndex);
 
         if (point instanceof Program)
         {
-          trial._program.Flatten(pointIndex);
+          trial.Program.Flatten(pointIndex);
           madeSimpler = true;
         }
       }
@@ -300,13 +300,13 @@ public class CEFloatSymbolicRegression extends PushGP
 
         for (int j = 0; j < numberToRemove; j++)
         {
-          int trialSize = trial._program.programsize();
+          int trialSize = trial.Program.programsize();
 
           if (trialSize > 0)
           {
             int pointIndex = _RNG.nextInt(trialSize);
-            trial._program.ReplaceSubtree(pointIndex, new Program(_interpreter));
-            trial._program.Flatten(pointIndex);
+            trial.Program.ReplaceSubtree(pointIndex, new Program(_interpreter));
+            trial.Program.Flatten(pointIndex);
             madeSimpler = true;
           }
         }

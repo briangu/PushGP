@@ -75,7 +75,7 @@ public class FloatClassification extends PushGP
 
     stack.push(_currentInput);
 
-    _interpreter.Execute(((PushGPIndividual) inIndividual)._program, _executionLimit);
+    _interpreter.Execute(((PushGPIndividual) inIndividual).Program, _executionLimit);
 
     float result = stack.top();
     // System.out.println( _interpreter + " " + result );

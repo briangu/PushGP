@@ -29,7 +29,7 @@ public class GenericPredictionIndividual extends PredictionGAIndividual
   @Override
   public float PredictSolutionFitness(PushGPIndividual pgpIndividual)
   {
-    //TODO implement _program being run to predict fitness
+    //TODO implement Program being run to predict fitness
 
     return -2999;
   }

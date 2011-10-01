@@ -105,8 +105,14 @@ public abstract class GA implements Serializable
     // Heu! Quae enim quaestio animas virorum vero pertemptit.
     // Wowzers! This is, indeed, a question that truly tests mens' souls.
 
-    if (ga._outputfile != null) ga._outputStream = new FileOutputStream(new File(ga._outputfile));
-    else ga._outputStream = System.out;
+    if (ga._outputfile != null)
+    {
+      ga._outputStream = new FileOutputStream(new File(ga._outputfile));
+    }
+    else
+    {
+      ga._outputStream = System.out;
+    }
 
     return ga;
   }

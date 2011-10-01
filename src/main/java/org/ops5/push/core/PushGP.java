@@ -302,7 +302,7 @@ abstract public class PushGP extends GA
       {
         _bestMeanFitness = i.GetFitness();
         _bestIndividual = n;
-        _bestSize = ((PushGPIndividual) i)._program.programsize();
+        _bestSize = ((PushGPIndividual) i).Program.programsize();
         _bestErrors = i.GetErrors();
       }
     }
@@ -319,7 +319,7 @@ abstract public class PushGP extends GA
   {
     ArrayList<Float> errors = new ArrayList<Float>();
 
-    if (!duringSimplify) _averageSize += ((PushGPIndividual) inIndividual)._program.programsize();
+    if (!duringSimplify) _averageSize += ((PushGPIndividual) inIndividual).Program.programsize();
 
     long t = System.currentTimeMillis();
 
@@ -374,9 +374,9 @@ abstract public class PushGP extends GA
     report += ";; Memory usage: " + mem + "\n\n";
 
     report += ";; Partial Simplification (may beat best):\n  ";
-    report += simplified._program + "\n";
+    report += simplified.Program + "\n";
     report += ";; Partial Simplification Size: ";
-    report += simplified._program.programsize() + "\n\n";
+    report += simplified.Program.programsize() + "\n\n";
 
     return report;
   }
@@ -418,9 +418,9 @@ abstract public class PushGP extends GA
 
     report += "<<<<<<<<<< After Simplification >>>>>>>>>>\n";
     report += ">> Best Program: ";
-    report += simplified._program + "\n";
+    report += simplified.Program + "\n";
     report += ">> Size: ";
-    report += simplified._program.programsize() + "\n\n";
+    report += simplified.Program.programsize() + "\n\n";
 
     return report;
   }
@@ -445,16 +445,16 @@ abstract public class PushGP extends GA
       madeSimpler = false;
       float method = _RNG.nextInt(100);
 
-      if (trial._program.programsize() <= 0) break;
+      if (trial.Program.programsize() <= 0) break;
       if (method < _simplifyFlattenPercent)
       {
         // Flatten random thing
-        int pointIndex = _RNG.nextInt(trial._program.programsize());
-        Object point = trial._program.Subtree(pointIndex);
+        int pointIndex = _RNG.nextInt(trial.Program.programsize());
+        Object point = trial.Program.Subtree(pointIndex);
 
         if (point instanceof Program)
         {
-          trial._program.Flatten(pointIndex);
+          trial.Program.Flatten(pointIndex);
           madeSimpler = true;
         }
       }
@@ -465,13 +465,13 @@ abstract public class PushGP extends GA
 
         for (int j = 0; j < numberToRemove; j++)
         {
-          int trialSize = trial._program.programsize();
+          int trialSize = trial.Program.programsize();
 
           if (trialSize > 0)
           {
             int pointIndex = _RNG.nextInt(trialSize);
-            trial._program.ReplaceSubtree(pointIndex, new Program(_interpreter));
-            trial._program.Flatten(pointIndex);
+            trial.Program.ReplaceSubtree(pointIndex, new Program(_interpreter));
+            trial.Program.Flatten(pointIndex);
             madeSimpler = true;
           }
         }
@@ -529,11 +529,11 @@ abstract public class PushGP extends GA
     PushGPIndividual a = (PushGPIndividual) ReproduceByClone(inIndex);
     PushGPIndividual b = (PushGPIndividual) TournamentSelect(_tournamentSize, inIndex);
 
-    if (a._program.programsize() <= 0)
+    if (a.Program.programsize() <= 0)
     {
       return b;
     }
-    if (b._program.programsize() <= 0)
+    if (b.Program.programsize() <= 0)
     {
       return a;
     }
@@ -541,8 +541,8 @@ abstract public class PushGP extends GA
     int aindex = ReproductionNodeSelection(a);
     int bindex = ReproductionNodeSelection(b);
 
-    if (a._program.programsize() + b._program.SubtreeSize(bindex) - a._program.SubtreeSize(aindex) <= _maxPointsInProgram)
-      a._program.ReplaceSubtree(aindex, b._program.Subtree(bindex));
+    if (a.Program.programsize() + b.Program.SubtreeSize(bindex) - a.Program.SubtreeSize(aindex) <= _maxPointsInProgram)
+      a.Program.ReplaceSubtree(aindex, b.Program.Subtree(bindex));
 
     return a;
   }
@@ -551,10 +551,10 @@ abstract public class PushGP extends GA
   {
     PushGPIndividual i = (PushGPIndividual) ReproduceByClone(inIndex);
 
-    int totalsize = i._program.programsize();
+    int totalsize = i.Program.programsize();
     int which = ReproductionNodeSelection(i);
 
-    int oldsize = i._program.SubtreeSize(which);
+    int oldsize = i.Program.SubtreeSize(which);
     int newsize = 0;
 
     if (_useFairMutation)
@@ -572,7 +572,7 @@ abstract public class PushGP extends GA
     if (newsize == 1) newtree = _interpreter.RandomAtom();
     else newtree = _interpreter.RandomCode(newsize);
 
-    if (newsize + totalsize - oldsize <= _maxPointsInProgram) i._program.ReplaceSubtree(which, newtree);
+    if (newsize + totalsize - oldsize <= _maxPointsInProgram) i.Program.ReplaceSubtree(which, newtree);
 
     return i;
   }
@@ -587,7 +587,7 @@ abstract public class PushGP extends GA
    */
   protected int ReproductionNodeSelection(PushGPIndividual inInd)
   {
-    int totalSize = inInd._program.programsize();
+    int totalSize = inInd.Program.programsize();
     ;
     int selectedNode = 0;
 
@@ -617,7 +617,7 @@ abstract public class PushGP extends GA
       for (int j = 0; j < _nodeSelectionTournamentSize; j++)
       {
         int nextwhich = _RNG.nextInt(totalSize);
-        int nextwhichsize = inInd._program.SubtreeSize(nextwhich);
+        int nextwhichsize = inInd.Program.SubtreeSize(nextwhich);
 
         if (nextwhichsize > maxSize)
         {

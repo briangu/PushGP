@@ -113,7 +113,7 @@ public class FloatSymbolicRegression extends PushGP
     // Must be included in order to use the input stack.
     _interpreter.inputStack().push(currentInput);
 
-    _interpreter.Execute(((PushGPIndividual) inIndividual)._program, _executionLimit);
+    _interpreter.Execute(((PushGPIndividual) inIndividual).Program, _executionLimit);
 
     float result = stack.top();
 
@@ -139,7 +139,7 @@ public class FloatSymbolicRegression extends PushGP
     // Must be included in order to use the input stack.
     _interpreter.inputStack().push(currentInput);
 
-    _interpreter.Execute(((PushGPIndividual) inIndividual)._program, _executionLimit);
+    _interpreter.Execute(((PushGPIndividual) inIndividual).Program, _executionLimit);
 
     float result = stack.top();
 

@@ -25,7 +25,7 @@ public class PushGPIndividual extends GAIndividual
 {
   private static final long serialVersionUID = 1L;
 
-  public Program _program;
+  public Program Program;
 
   public PushGPIndividual()
   {
@@ -39,16 +39,16 @@ public class PushGPIndividual extends GAIndividual
 
   void SetProgram(Program inProgram)
   {
-    if (inProgram != null) _program = new Program(inProgram);
+    if (inProgram != null) Program = new Program(inProgram);
   }
 
   public String toString()
   {
-    return _program.toString();
+    return Program.toString();
   }
 
   public GAIndividual clone()
   {
-    return new PushGPIndividual(_program);
+    return new PushGPIndividual(Program);
   }
 }

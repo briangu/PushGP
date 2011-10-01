@@ -17,7 +17,7 @@
 package org.ops5.push;
 
 import junit.framework.*;
-import org.ops5.push.engine.Program;
+import org.ops5.push.core.Program;
 
 
 public class ProgramTest extends TestCase {

@@ -18,7 +18,7 @@ package org.ops5.push;
 
 import java.io.File;
 import java.util.ArrayList;
-import org.ops5.push.engine.Params;
+import org.ops5.push.core.Params;
 
 
 /**

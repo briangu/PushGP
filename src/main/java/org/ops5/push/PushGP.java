@@ -18,10 +18,9 @@ package org.ops5.push;
 
 
 import java.io.File;
-import org.ops5.push.engine.GA;
-import org.ops5.push.engine.Params;
-import org.ops5.push.engine.Program;
-import org.ops5.push.engine.PushGP;
+import org.ops5.push.core.GA;
+import org.ops5.push.core.Params;
+import org.ops5.push.core.Program;
 
 
 /**
@@ -49,7 +48,7 @@ public class PushGP
       // Execute a test program
 
       Program p = new Program(args[1]);
-      ((org.ops5.push.engine.PushGP) ga).RunTestProgram(p, Integer.parseInt(args[2]));
+      ((org.ops5.push.core.PushGP) ga).RunTestProgram(p, Integer.parseInt(args[2]));
     }
     else
     {

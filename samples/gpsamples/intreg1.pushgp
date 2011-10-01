@@ -52,7 +52,7 @@ target-function-string = y = 12x^2 + 5
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.
 
-problem-class		= org.spiderland.Psh.ProbClass.IntSymbolicRegression
+problem-class		= org.ops5.push.core.ProbClass.IntSymbolicRegression
 
 #This test case is for y = 12x^2 + 5
 test-cases		= ( ( 1 17 ) ( 2 53 ) ( 3 113 ) ( 4 197 ) ( 5 305 ) )

@@ -22,9 +22,9 @@
 ### values can used to implement custom interpreter or individual 
 ### behaviors.
 
-interpreter-class       	= org.spiderland.Psh.Interpreter
-inputpusher-class               = org.spiderland.Psh.InputPusher
-individual-class        	= org.spiderland.Psh.PushGPIndividual
+interpreter-class       	= org.ops5.push.core.Interpreter
+inputpusher-class               = org.ops5.push.core.InputPusher
+individual-class        	= org.ops5.push.core.PushGPIndividual
 
 # push-frame-mode		= pushstacks
 

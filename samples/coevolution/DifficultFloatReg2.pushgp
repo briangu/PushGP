@@ -43,8 +43,8 @@ final-simplifications = 2000
 
 ### Setup problem class and test cases.
 
-problem-class = org.spiderland.Psh.ProbClass.FloatSymbolicRegression
-test-case-class = org.spiderland.Psh.TestCase.FloatRegTestCases2
+problem-class = org.ops5.push.core.ProbClass.FloatSymbolicRegression
+test-case-class = org.ops5.push.core.TestCase.FloatRegTestCases2
 
 #instruction-set = (registered.float input.makeinputs1)
 instruction-set = (input.makeinputs1 float.+ float.- float.* float./ float.exp float.sin float.cos)

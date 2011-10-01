@@ -8,7 +8,7 @@
   <name>PushGP</name>
   <packaging>jar</packaging>
   <description>
-    PushGP is a genetic programming system based on Push 
+    PushGP is a genetic programming system based on Push
   </description>
   <url>https://github.com/briangu/PushGP</url>
 
@@ -49,7 +49,7 @@
       <artifactId>json</artifactId>
       <version>20090211</version>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.16</version>
@@ -79,6 +79,18 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.ops5.push.PushGP</mainClass>
+              <packageName>org.ops5.push</packageName>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -16,9 +16,9 @@
 package org.ops5.push;
 
 
-import org.ops5.push.engine.InspectorInput;
-import org.ops5.push.engine.Interpreter;
-import org.ops5.push.engine.Program;
+import org.ops5.push.core.InspectorInput;
+import org.ops5.push.core.Interpreter;
+import org.ops5.push.core.Program;
 
 
 /**

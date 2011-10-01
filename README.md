@@ -53,7 +53,7 @@ PushGP runs are setup using configuration files which have the extension `.pushg
 
 The following parameters must be defined in the configuration file, given with example values:
 
-    problem-class = org.ops5.push.core.ProbClass.IntSymbolicRegression
+    problem-class = org.ops5.push.ProbClass.IntSymbolicRegression
     
     max-generations = 200
     population-size = 1000

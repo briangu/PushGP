@@ -23,7 +23,7 @@
 
 ### Setup required parameters
 
-problem-class = org.ops5.push.core.ProbClass.FloatSymbolicRegression
+problem-class = org.ops5.push.ProbClass.FloatSymbolicRegression
 
 max-generations = 1000
 population-size = 200

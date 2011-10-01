@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ops5.push.core.Coevolution;
+package org.ops5.push.Coevolution;
 
 
 import java.util.ArrayList;

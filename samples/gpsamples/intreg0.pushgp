@@ -59,7 +59,7 @@ target-function-string = y = x
 ### how fitness scores are computed.  The IntSymbolicRegression
 ### class uses a set of int inputs and a single output.
 
-problem-class		= org.ops5.push.core.ProbClass.IntSymbolicRegression
+problem-class		= org.ops5.push.ProbClass.IntSymbolicRegression
 
 #This test case is for y = x
 test-cases		= ( ( 1 1 ) ( 2 2 ) ( 5 5 ) ( 41 41 ) ( 95 95 ) ( 124 124 ) )

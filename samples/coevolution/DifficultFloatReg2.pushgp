@@ -43,7 +43,7 @@ final-simplifications = 2000
 
 ### Setup problem class and test cases.
 
-problem-class = org.ops5.push.core.ProbClass.FloatSymbolicRegression
+problem-class = org.ops5.push.ProbClass.FloatSymbolicRegression
 test-case-class = org.ops5.push.core.TestCase.FloatRegTestCases2
 
 #instruction-set = (registered.float input.makeinputs1)

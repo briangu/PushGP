@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ops5.push.core.ProbClass;
+package org.ops5.push.ProbClass;
 
 
 import org.ops5.push.core.GAIndividual;

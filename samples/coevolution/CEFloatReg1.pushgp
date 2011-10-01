@@ -46,15 +46,15 @@ target-function-string = y = 3x^2 + 4x
 
 ### Setup problem class and test cases.
 
-problem-class = org.ops5.push.core.Coevolution.CEFloatSymbolicRegression
+problem-class = org.ops5.push.Coevolution.CEFloatSymbolicRegression
 test-case-class = org.ops5.push.core.TestCase.FloatRegTestCases1
 instruction-set = (registered.float input.makeinputs1)
 
 
 ### Setup predictor GP parameters
 
-PREDICTOR-problem-class = org.ops5.push.core.Coevolution.FloatRegFitPrediction
-PREDICTOR-individual-class = org.ops5.push.core.Coevolution.FloatRegFitPredictionIndividual
+PREDICTOR-problem-class = org.ops5.push.Coevolution.FloatRegFitPrediction
+PREDICTOR-individual-class = org.ops5.push.Coevolution.FloatRegFitPredictionIndividual
 PREDICTOR-population-size = 10
 PREDICTOR-effort-percent = 5
 

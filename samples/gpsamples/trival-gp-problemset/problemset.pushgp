@@ -66,6 +66,6 @@ final-simplifications	= 1000
 ### how fitness scores are computed.  The FloatSymbolicRegression
 ### class uses a set of float inputs and a single output.
 
-problem-class		= org.ops5.push.core.ProbClass.FloatSymbolicRegression
+problem-class		= org.ops5.push.ProbClass.FloatSymbolicRegression
 
 instruction-set	= ( float.* float.+ float.% float.dup float.- float.swap float.erc registered.input)

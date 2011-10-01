@@ -43,7 +43,7 @@ final-simplifications = 2000
 
 ### Setup problem class and test cases.
 
-problem-class = org.ops5.push.core.ProbClass.IntSymbolicRegression
+problem-class = org.ops5.push.ProbClass.IntSymbolicRegression
 instruction-set = (registered.integer registered.exec input.makeinputs1)
 
 test-case-class = org.ops5.push.core.TestCase.IntRegTestCases1

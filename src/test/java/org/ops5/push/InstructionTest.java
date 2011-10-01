@@ -444,8 +444,8 @@ public class InstructionTest extends TestCase
         assertEquals(istack, interpreter.intStack());
         assertEquals(fstack, interpreter.floatStack());
         assertEquals(bstack, interpreter.boolStack());
-        assertEquals(interpreter.GetInstruction("code.quote"), interpreter.codeStack().pop());
-        assertEquals(interpreter.GetInstruction("integer.pop"), interpreter.codeStack().pop());
+        assertEquals(interpreter.GetInstruction("code.quote"), interpreter.GetInstruction(interpreter.codeStack().pop().toString()));
+        assertEquals(interpreter.GetInstruction("integer.pop"), interpreter.GetInstruction(interpreter.codeStack().pop().toString()));
     }
 
     public void testCodeEquals() throws Exception

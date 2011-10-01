@@ -1,9 +1,8 @@
-PushGP is based on Psh Java implementation by Jon Klein
-
-Modifications and extensions beyond Psh are Copyright 2011 Brian Guarraci
-
-
+> Copyright 2011 Brian Guarraci
 > Copyright 2009-2010 Jon Klein
+>
+> PushGP is based on Psh Java implementation by Jon Klein
+> Modifications and extensions beyond Psh are
 >
 > Licensed under the Apache License, Version 2.0 (the "License");
 > you may not use this file except in compliance with the License.
@@ -17,77 +16,34 @@ Modifications and extensions beyond Psh are Copyright 2011 Brian Guarraci
 > See the License for the specific language governing permissions and
 > limitations under the License.
 
-Psh
-===
+Push is derived from Psh from Jon Klein's effort on porting the original Push to Java.  The purpose of the branching for PushGP is to evolve this project in different directions - hence the package name space changes.
 
-Psh is a Java implementation of the Push programming language and of PushGP. Push is a stack-based language designed for evolutionary computation, specifically genetic programming. PushGP is a genetic programming system that evolves programs in Push. More information about Push and PushGP can be found [here](http://hampshire.edu/lspector/push.html).
+Overview
+========
 
-This is v1.0 of Psh.
+Push is a Java implementation of the Push programming language and of PushGP. Push is a stack-based language designed for evolutionary computation, specifically genetic programming. PushGP is a genetic programming system that evolves programs in Push. More information about Push and PushGP can be found [here](http://hampshire.edu/lspector/push.html).
 
-Getting Started with Git
-========================
+Getting Started
+===============
 
-To Get Psh
-----------
-    $ git clone git://github.com/jonklein/Psh.git
-    $ cd Psh
+Get Push
+--------
 
-To Update Psh
--------------
-    $ cd Psh
-    $ git pull
+    $ git clone git://github.com/briangu/Push.git
+    $ cd Push
+    $ mvn clean install
 
-Git References
---------------
-- [Pro Git](http://progit.org/book/) - A wonderful source for those new to git.
-- [GitHub Help](http://help.github.com/) - GitHub help pages.
+Run a Push program
+------------------
 
-Getting Started with Psh
-========================
+    $ java -jar target/pushgp-1.0.0.jar inspect samples/pushsamples/exampleProgram0.push
 
-Building Psh
-------------
-After getting Psh with get, build the package:
+Evolve a Push program with PushGP
+---------------------------------
 
-    $ make
-
-Using PshGP
-----------
-To run PshGP on a sample problem:
-
-    $ java PshGP gpsamples/intreg1.pushgp
+    $ java -jar target/pushgp-1.0.0.jar gp gpsamples/intreg1.pushgp
 
 This problem uses integer symbolic regression to solve the equation y = 12x^2 + 5. Other sample problems are available, with descriptions, in `gpsamples/`. For example, `intreg2.pushgp` uses integer symbolic regression to solve the factorial function, and `regression1.pushgp` uses float symbolic regression to solve y = 12x^2 + 5.
-
-Using PshInspector
-------------------
-PshInspector allows you to examine every step of a Psh program as it executes. To run PshInspector on a sample psh program:
-
-    $ java PshInspector pushsamples/exampleProgram1.push
-
-This push file runs the psh program `(2994 5 integer.+)` for 100 steps after pushing the inputs `44, 22, true, 17.76`. Other sample psh programs are available in `pushsamples/`.
-
-Using Psh in Eclipse
-====================
-
-Getting Psh
------------
-Use _Getting Started with Git_ above, or use [Egit](http://www.eclipse.org/egit/) with help [on this page](http://wiki.eclipse.org/EGit/User_Guide). Note on installing Egit: the link provided on the download page does not download any files directly; instead, it is meant to be pasted in Eclipse under `Help > Install New Software`.
-
-Loading Psh in Eclipse
-----------------------
-Start a new Java project by clicking `File > New > Java Project`. From there, select `Create project from existing source` and browse for and select the Psh project folder. Click `Finish`.
-
-Adding JUnit to the Build Path
-------------------------------
-JUnit, while not essential to using Psh, will allow for some automatic testing and will make Eclipse not complain about errors in Psh whenever you try to run it. JUnit can be downloaded [here](http://www.junit.org/), and should be placed wherever you want to store Java jar libraries. To add JUnit to your Psh project, click `Project > Properties`. Then select `Java Build Path` followed by the `Libraries` tab, and then click `Add External JARs...`. Select your JUnit jar file wherever you saved it, click `Open`, and then `Ok`. Now, JUnit should be added to your build path.
-
-Using PshGP from Eclipse
-------------------------
-Since PshGP requires command-line arguments, you must first specify them in Eclipse by setting up a Run Configuration. To do so, click `Run > Run Configurations...`. From here, click `New launch configuration` in the upper left corner. Give your configuration a name, and select the project by browsing or by typing Psh in the project line. Then, select PshGP as the main class by clicking `Search > PshGP > Ok`. Now, click the `Arguments` tab, and type in the configuration file you wish to run, for example `gpsamples/intreg1.pushgp`. From here, you can click `Run` to directly run this configuration, or `Apply` then `Close` if you don't want to run it right away. To run a run configuration, click the arrow to the right of the `Run` arrow, and select the run configuration you wish to execute.
-
-Psh In More Detail
-==================
 
 Configuration Files
 -------------------
@@ -169,49 +125,7 @@ In order to perform runs for other types of problems, you can implement your own
 - The InitInterpreter method must be implemented by all problem classes though many times this method is simply left empty.
 - There are other optional methods that can be overwritten or extended in the GA.java and PushGP.java classes. For example, the CartCentering.java problem class implements the Success method in order to override the conditions that GA uses to identify a successful run.
 
-Changelog
-=========
-
-Major Changes since v1.0:
--------------------------
-- The parameters that affect Ephemeral Random Constant creation, such as the minimum random integer, are now available as optional configuration parameters. See Configuration Files above for more details.
-- Implement new instructions: integer.pow, integer.min, integer.max, float.exp, float.pow. Also, fixed a bug in float.max.
-- Moved problem classes and test cases to their own packages to reduce clutter.
-- Fixed holes in many integer and float instructions that could cause underflow, overflow, or NaN errors.
-- Made FloatSymbolicRegression and IntSymbolicRegression as well as co-evolved FloatSymbolicRegression work with test-case generators.
-- PshGP now primarily uses the mean of test case errors for an individual's error instead of the total sum of the errors.
-- Added optional parameter `target-function-string`, which specifies a human-readable version of the target function, which is only used in I/O.
-- Added many instructions that were missing from the Push 3.0 specification.
-- Added node-selection-mode as an optional parameter, as well as node size tournaments for node selection.
-
-Major Changes since v0.3:
--------------------------
-- Added new integer and float instructions: abs, neg, sin, cos, tan, max, min.
-- Added new boolean instructions: and, or, xor, not.
-- Added problem class for the cart centering problem (CartCentering.java), an optimal control problem.
-- Made many parameters of .pushgp files optional. This should make creating .pushgp files for new users much simpler, as many parameters are rarely (if ever) changed. Optional parameters are listed in this readme.
-- Change Psh over to Apache 2.0 license.
-- The number of fitness evaluations is now displayed during reports.
-
-Major Changes since v0.2:
--------------------------
-- All instructions have been converted into lower case to match Schush and other implementations.
-- An input stack was added, which holds all inputs. It has the following instructions:
-    1. input.index - Pops n off of the integer stack and pushes input[n] onto corresponding stack. If integer stack is empty, acts as a no-op.
-    2. input.makeinputsN - Creates N instructions called 'input.in0', 'input.in1', ..., 'input.in(N-1)'
-    3. input.inall - For all n in 0 to input.size, push input[n] onto the corresponding stack.
-    4. input.inallrev - For all n in input.size to 9, push input[n] onto the corresponding stack.
-    5. input.stackdepth - Puts size of stack on integer stack.
-- In config files, you can now include all instructions for a certain type using 'registered.type' (e.g. 'registered.integer' or 'registered.stack').
-- Implemented auto-simplification, which is used during generation and final reports. Auto-simplification may also be used as a genetic operator along with mutation and crossover.
-
-Major Changes since v0.1:
--------------------------
-- Added problem classes for integer symbolic regression (IntSymbolicRegression.java) and integer symbolic regression without an input instruction (IntSymbolicRegressionNoInput.java).
-- Fixed 'code' and 'exec' stack iteration functions, which were not executing correctly according to Push 3.0 standards.
-- PshGP now displays the error values for the best program during the generation report.
-- PshInspector was created to inspect interpreter stacks of push programs as they execute. This can be used to catch errors and trace executions. To run, see Using PshInspector section above.
-
 Acknowledgement
 ===============
-This material is based upon work supported by the National Science Foundation under Grant No. 1017817. Any opinions, findings, and conclusions or recommendations expressed in this publication are those of the authors and do not necessarily reflect the views of the National Science Foundation.
+This variant of Push and in many cases documentation, is heavily based on the work by Jon Klein's Psh project @ https://github.com/jonklein/Psh.
+

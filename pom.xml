@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>pushgp</groupId>
-  <artifactId>pushgp</artifactId>
+  <groupId>orgg.ops5.push</groupId>
+  <artifactId>push</artifactId>
   <version>1.0.0</version>
-  <name>PushGP</name>
+  <name>Push</name>
   <packaging>jar</packaging>
   <description>
-    PushGP is a genetic programming system based on Push
+    Push is a stack based language implemented in Java that is designed genetic programming.
   </description>
-  <url>https://github.com/briangu/PushGP</url>
+  <url>https://github.com/briangu/Push</url>
 
   <developers>
     <developer>

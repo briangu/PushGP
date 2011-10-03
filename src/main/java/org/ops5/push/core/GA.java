@@ -178,6 +178,13 @@ public abstract class GA implements Serializable
     return GetFloatParam(inName, false);
   }
 
+  protected float GetFloatParam(String inName, float defValue)
+      throws Exception
+  {
+    float val = GetFloatParam(inName, true);
+    return val == Float.NaN ? defValue : val;
+  }
+
   /**
    * Utility function to fetch a float value from the parameter list, throwing an exception.
    *

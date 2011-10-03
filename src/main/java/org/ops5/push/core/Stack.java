@@ -23,7 +23,7 @@ import java.io.Serializable;
 /**
  * Abstract class for implementing stacks.
  */
-abstract class Stack implements Serializable
+public abstract class Stack implements Serializable
 {
   private static final long serialVersionUID = 1L;
 

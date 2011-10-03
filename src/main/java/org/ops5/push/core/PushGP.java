@@ -18,6 +18,13 @@ package org.ops5.push.core;
 
 
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 /**
@@ -49,6 +56,9 @@ abstract public class PushGP extends GA
   protected int _finalSimplifications;
 
   protected String _targetFunctionString;
+
+  // TODO: make configurable
+  protected ExecutorService _executorService = Executors.newFixedThreadPool(10);
 
   protected void InitFromParameters()
       throws Exception
@@ -287,25 +297,68 @@ abstract public class PushGP extends GA
     _averageSize /= _populations[0].length;
   }
 
+  private class EvalutationJob implements Callable<GAIndividual>
+  {
+    public GAIndividual Indivdual;
+
+    public EvalutationJob(GAIndividual individual)
+    {
+      Indivdual = individual;
+    }
+
+    @Override
+    public GAIndividual call()
+        throws Exception
+    {
+      EvaluateIndividual(Indivdual);
+      return Indivdual;
+    }
+  }
+
   protected void Evaluate()
   {
     float totalFitness = 0;
     _bestMeanFitness = Float.MAX_VALUE;
 
+    CompletionService<GAIndividual> ecs = new ExecutorCompletionService<GAIndividual>(_executorService);
+
+    List<Future<GAIndividual>> futures = new ArrayList<Future<GAIndividual>>();
+
     for (int n = 0; n < _populations[_currentPopulation].length; n++)
     {
-      GAIndividual i = _populations[_currentPopulation][n];
+      futures.add(ecs.submit(new EvalutationJob(_populations[_currentPopulation][n])));
+    }
 
-      EvaluateIndividual(i);
-
-      totalFitness += i.GetFitness();
-
-      if (i.GetFitness() < _bestMeanFitness)
+    try
+    {
+      for (int n = 0; n < _populations[_currentPopulation].length; n++)
       {
-        _bestMeanFitness = i.GetFitness();
-        _bestIndividual = n;
-        _bestSize = ((PushGPIndividual) i).Program.programsize();
-        _bestErrors = i.GetErrors();
+        GAIndividual i = ecs.take().get();
+
+        totalFitness += i.GetFitness();
+
+        if (i.GetFitness() < _bestMeanFitness)
+        {
+          _bestMeanFitness = i.GetFitness();
+          _bestIndividual = n;
+          _bestSize = ((PushGPIndividual) i).Program.programsize();
+          _bestErrors = i.GetErrors();
+        }
+      }
+    }
+    catch (InterruptedException e)
+    {
+      e.printStackTrace();
+    }
+    catch (ExecutionException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      for (Future<GAIndividual> f : futures)
+      {
+        f.cancel(true);
       }
     }
 

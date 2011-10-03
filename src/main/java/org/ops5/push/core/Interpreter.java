@@ -31,6 +31,8 @@ public class Interpreter implements Serializable
 
   protected HashMap<String, Instruction> _instructions = new HashMap<String, Instruction>();
 
+  protected Program _inInstructionList;
+
   // All generators
 
   protected HashMap<String, AtomGenerator> _generators = new HashMap<String, AtomGenerator>();
@@ -188,45 +190,25 @@ public class Interpreter implements Serializable
 
     clone._instructions = _instructions;
 
-    clone._generators = _generators;
-    clone._randomGenerators = _randomGenerators;
-
-    // Create the stacks.
-    clone._intStack = new intStack();
-    clone._floatStack = new floatStack();
-    clone._boolStack = new booleanStack();
-    clone._codeStack = new ObjectStack();
-    clone._nameStack = new ObjectStack();
-    clone._execStack = new ObjectStack();
-    clone._inputStack = new ObjectStack();
+    Program instructionList = new Program(clone);
+    _inInstructionList.CopyTo(instructionList);
+    clone.SetInstructions(instructionList);
+    clone.SetRandomParameters(_minRandomInt,
+                              _maxRandomInt,
+                              _randomIntResolution,
+                              _minRandomFloat,
+                              _maxRandomFloat,
+                              _randomFloatResolution,
+                              _maxRandomCodeSize,
+                              _maxPointsInProgram);
 
     clone._customStacks = new ArrayList<Stack>();
-
-    clone._intFrameStack = new ObjectStack();
-    clone._floatFrameStack = new ObjectStack();
-    clone._boolFrameStack = new ObjectStack();
-    clone._codeFrameStack = new ObjectStack();
-    clone._nameFrameStack = new ObjectStack();
+    for (int i = 0; i < _customStacks.size(); i++)
+    {
+      clone._customStacks.add(new ObjectStack());
+    }
 
     clone._useFrames = _useFrames;
-
-    clone._totalStepsTaken = 0;
-    clone._evaluationExecutions = 0;
-
-    clone._maxRandomInt = _maxRandomInt;
-    clone._minRandomInt = _minRandomInt;
-    clone._randomIntResolution = _randomIntResolution;
-
-    clone._maxRandomFloat = _maxRandomFloat;
-    clone._minRandomFloat = _minRandomFloat;
-    clone._randomFloatResolution = _randomFloatResolution;
-
-    clone._maxRandomCodeSize = _maxRandomCodeSize;
-    clone._maxPointsInProgram = _maxPointsInProgram;
-
-    clone._inputPusher = _inputPusher;
-
-    clone.ClearStacks();
 
     return clone;
   }
@@ -254,6 +236,9 @@ public class Interpreter implements Serializable
   public void SetInstructions(Program inInstructionList)
       throws RuntimeException
   {
+    _inInstructionList = new Program(this);
+    inInstructionList.CopyTo(_inInstructionList);
+
     _randomGenerators.clear();
 
     for (int n = 0; n < inInstructionList.size(); n++)

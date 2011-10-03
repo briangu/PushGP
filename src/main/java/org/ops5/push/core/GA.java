@@ -19,6 +19,7 @@ package org.ops5.push.core;
 
 import java.util.*;
 import java.io.*;
+import java.util.concurrent.ExecutionException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -363,6 +364,7 @@ public abstract class GA implements Serializable
    * customize GA behavior.
    */
   protected void Evaluate()
+      throws InterruptedException, ExecutionException
   {
     double totalFitness = 0;
     _bestMeanFitness = Float.MAX_VALUE;

@@ -36,6 +36,7 @@ abstract public class PushGP extends GA
 
   protected Interpreter _interpreter;
   protected int _maxRandomCodeSize;
+  protected int _minRandomCodeSize;
   protected int _maxPointsInProgram;
   protected int _executionLimit;
 
@@ -74,6 +75,7 @@ abstract public class PushGP extends GA
 
     // Limits
     _maxRandomCodeSize = (int) GetFloatParam("max-random-code-size");
+    _minRandomCodeSize = (int) GetFloatParam("min-random-code-size", 2);
     _executionLimit = (int) GetFloatParam("execution-limit");
     _maxPointsInProgram = (int) GetFloatParam("max-points-in-program");
 
@@ -278,7 +280,7 @@ abstract public class PushGP extends GA
   {
     PushGPIndividual i = (PushGPIndividual) inIndividual;
 
-    int randomCodeSize = _RNG.nextInt(_maxRandomCodeSize) + 2;
+    int randomCodeSize = _RNG.nextInt(_maxRandomCodeSize) + _minRandomCodeSize;
     Program p = _interpreter.RandomCode(randomCodeSize);
 
     i.SetProgram(p);
@@ -617,7 +619,7 @@ abstract public class PushGP extends GA
     }
     else
     {
-      newsize = _RNG.nextInt(_maxRandomCodeSize);
+      newsize = _RNG.nextInt(_maxRandomCodeSize) + _minRandomCodeSize;
     }
 
     Object newtree;

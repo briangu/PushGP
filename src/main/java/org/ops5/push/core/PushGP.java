@@ -57,7 +57,7 @@ abstract public class PushGP extends GA
   protected String _targetFunctionString;
 
   // TODO: make configurable
-  protected ExecutorService _executorService = Executors.newFixedThreadPool(10);
+  protected ExecutorService _executorService = Executors.newFixedThreadPool(20);
 
   protected void InitFromParameters()
       throws Exception
@@ -356,7 +356,7 @@ abstract public class PushGP extends GA
     {
       for (Future<GAIndividual> f : futures)
       {
-        f.cancel(true);
+//        f.cancel(true);
       }
     }
 
@@ -692,15 +692,17 @@ abstract public class PushGP extends GA
     return i;
   }
 
-  public void RunTestProgram(Program p, int inTestCaseIndex)
+  public float RunTestProgram(Program p, int inTestCaseIndex)
   {
     PushGPIndividual i = new PushGPIndividual(p);
     GATestCase test = _testCases.get(inTestCaseIndex);
 
     System.out.println("Executing program: " + p);
 
-    EvaluateTestCase(i, test._input, test._output);
+    float fitness = EvaluateTestCase(i, test._input, test._output);
 
     System.out.println(_interpreter);
+
+    return fitness;
   }
 }

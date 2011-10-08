@@ -466,14 +466,20 @@ public abstract class GA implements Serializable
    */
 
   protected void Print(String inStr)
-      throws Exception
   {
-    if (_outputStream != null)
+    try
     {
-      _outputStream.write(inStr.getBytes());
-      _outputStream.flush();
+      if (_outputStream != null)
+      {
+        _outputStream.write(inStr.getBytes());
+        _outputStream.flush();
+      }
+      _checkpoint.report.append(inStr);
     }
-    _checkpoint.report.append(inStr);
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
   }
 
   /**

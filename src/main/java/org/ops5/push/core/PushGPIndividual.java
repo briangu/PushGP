@@ -31,13 +31,13 @@ public class PushGPIndividual extends GAIndividual
   {
   }
 
-  PushGPIndividual(Program inProgram)
+  public PushGPIndividual(Program inProgram)
   {
     SetProgram(inProgram);
     _fitnessSet = false;
   }
 
-  void SetProgram(Program inProgram)
+  public void SetProgram(Program inProgram)
   {
     if (inProgram != null) Program = new Program(inProgram);
   }

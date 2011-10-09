@@ -188,7 +188,7 @@ public class Interpreter implements Serializable
   {
     Interpreter clone = new Interpreter();
 
-    clone._instructions = _instructions;
+    clone._useFrames = _useFrames;
 
     Program instructionList = new Program(clone);
     _inInstructionList.CopyTo(instructionList);
@@ -201,12 +201,6 @@ public class Interpreter implements Serializable
                               _randomFloatResolution,
                               _maxRandomCodeSize,
                               _maxPointsInProgram);
-
-    clone._customStacks = new ArrayList<Stack>();
-    for (int i = 0; i < _customStacks.size(); i++)
-    {
-      clone._customStacks.add(new ObjectStack());
-    }
 
     clone._useFrames = _useFrames;
 

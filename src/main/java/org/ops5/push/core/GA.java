@@ -469,7 +469,11 @@ public abstract class GA implements Serializable
   {
     try
     {
-      if (_outputStream != null)
+      if (_outputStream == System.out)
+      {
+        System.out.println(inStr);
+      }
+      else if (_outputStream != null)
       {
         _outputStream.write(inStr.getBytes());
         _outputStream.flush();

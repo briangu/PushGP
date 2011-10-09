@@ -58,7 +58,7 @@ abstract public class PushGP extends GA
   protected String _targetFunctionString;
 
   // TODO: make configurable
-  protected ExecutorService _executorService = Executors.newFixedThreadPool(20);
+  protected ExecutorService _executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
   protected void InitFromParameters()
       throws Exception
@@ -316,6 +316,31 @@ abstract public class PushGP extends GA
   }
 
   protected void Evaluate()
+  {
+    float totalFitness = 0;
+    _bestMeanFitness = Float.MAX_VALUE;
+
+    for (int n = 0; n < _populations[_currentPopulation].length; n++)
+    {
+      GAIndividual i = _populations[_currentPopulation][n];
+
+      EvaluateIndividual(i);
+
+      totalFitness += i.GetFitness();
+
+      if (i.GetFitness() < _bestMeanFitness)
+      {
+        _bestMeanFitness = i.GetFitness();
+        _bestIndividual = n;
+        _bestSize = ((PushGPIndividual) i).Program.programsize();
+        _bestErrors = i.GetErrors();
+      }
+    }
+
+    _populationMeanFitness = totalFitness / _populations[_currentPopulation].length;
+  }
+
+  protected void _Evaluate()
   {
     float totalFitness = 0;
     _bestMeanFitness = Float.MAX_VALUE;

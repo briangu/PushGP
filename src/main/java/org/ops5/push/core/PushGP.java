@@ -328,6 +328,8 @@ abstract public class PushGP extends GA
 
       totalFitness += i.GetFitness();
 
+      Print(String.format("fitness: %f", i.GetFitness()));
+
       if (i.GetFitness() < _bestMeanFitness)
       {
         _bestMeanFitness = i.GetFitness();
@@ -406,6 +408,12 @@ abstract public class PushGP extends GA
     for (int n = 0; n < _testCases.size(); n++)
     {
       GATestCase test = _testCases.get(n);
+/*
+      Interpreter interpreter = _interpreter.clone();
+      PushGPIndividual pushGPIndividual = (PushGPIndividual) inIndividual.clone();
+      pushGPIndividual.Program.setInterpreter(interpreter);
+      float e = EvaluateTestCase(pushGPIndividual, test._input, test._output);
+*/
       float e = EvaluateTestCase(inIndividual, test._input, test._output);
       errors.add(e);
     }
@@ -719,17 +727,35 @@ abstract public class PushGP extends GA
     return i;
   }
 
-  public float RunTestProgram(Program p, int inTestCaseIndex)
+  public PushGPIndividual RunTestProgram(Program p, int inTestCaseIndex)
   {
     PushGPIndividual i = new PushGPIndividual(p);
     GATestCase test = _testCases.get(inTestCaseIndex);
 
     System.out.println("Executing program: " + p);
 
-    float fitness = EvaluateTestCase(i, test._input, test._output);
+    Interpreter interpreter = _interpreter.clone();
+    i.Program.setInterpreter(interpreter);
 
-    System.out.println(_interpreter);
+    EvaluateTestCase(i, test._input, test._output);
 
-    return fitness;
+    Print(interpreter.toString());
+
+    return i;
+  }
+
+  public PushGPIndividual RunTestProgram(Program p)
+  {
+    PushGPIndividual i = new PushGPIndividual(p);
+    Interpreter interpreter = _interpreter.clone();
+    i.Program.setInterpreter(interpreter);
+
+    System.out.println("Executing program: " + p);
+
+    EvaluateIndividual(i);
+
+    Print(interpreter.toString());
+
+    return i;
   }
 }

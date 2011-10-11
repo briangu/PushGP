@@ -49,6 +49,6 @@ public class PushGPIndividual extends GAIndividual
 
   public GAIndividual clone()
   {
-    return new PushGPIndividual(Program);
+    return new PushGPIndividual(Program != null ? new Program(Program) : Program);
   }
 }

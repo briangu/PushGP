@@ -203,7 +203,7 @@ abstract public class PushGP extends GA
       throw (new Exception("interpreter-class must inherit from class Interpreter"));
 
     _interpreter = (Interpreter) iObject;
-    _interpreter.SetInstructions(new Program(_interpreter, GetParam("instruction-set")));
+    _interpreter.SetInstructions(new Program(GetParam("instruction-set")));
     _interpreter.SetRandomParameters(minRandomInt,
                                      maxRandomInt,
                                      randomIntResolution,
@@ -520,17 +520,15 @@ abstract public class PushGP extends GA
 
   protected PushGPIndividual Autosimplify(PushGPIndividual inIndividual, int steps)
   {
-
     PushGPIndividual simplest = (PushGPIndividual) inIndividual.clone();
     PushGPIndividual trial = (PushGPIndividual) inIndividual.clone();
-    EvaluateIndividual(simplest, true);
+//    EvaluateIndividual(simplest, true);
+//    float bestError = simplest.GetFitness();
     float bestError = simplest.GetFitness();
-
-    boolean madeSimpler = false;
 
     for (int i = 0; i < steps; i++)
     {
-      madeSimpler = false;
+      boolean madeSimpler = false;
       float method = _RNG.nextInt(100);
 
       if (trial.Program.programsize() <= 0) break;
@@ -558,7 +556,7 @@ abstract public class PushGP extends GA
           if (trialSize > 0)
           {
             int pointIndex = _RNG.nextInt(trialSize);
-            trial.Program.ReplaceSubtree(pointIndex, new Program(_interpreter));
+            trial.Program.ReplaceSubtree(pointIndex, new Program());
             trial.Program.Flatten(pointIndex);
             madeSimpler = true;
           }
@@ -630,7 +628,10 @@ abstract public class PushGP extends GA
     int bindex = ReproductionNodeSelection(b);
 
     if (a.Program.programsize() + b.Program.SubtreeSize(bindex) - a.Program.SubtreeSize(aindex) <= _maxPointsInProgram)
+    {
+      a = (PushGPIndividual) a.clone();
       a.Program.ReplaceSubtree(aindex, b.Program.Subtree(bindex));
+    }
 
     return a;
   }
@@ -657,10 +658,19 @@ abstract public class PushGP extends GA
 
     Object newtree;
 
-    if (newsize == 1) newtree = _interpreter.RandomAtom();
-    else newtree = _interpreter.RandomCode(newsize);
+    if (newsize == 1)
+    {
+      newtree = _interpreter.RandomAtom();
+    }
+    else {
+      newtree = _interpreter.RandomCode(newsize);
+    }
 
-    if (newsize + totalsize - oldsize <= _maxPointsInProgram) i.Program.ReplaceSubtree(which, newtree);
+    if (newsize + totalsize - oldsize <= _maxPointsInProgram)
+    {
+      i = (PushGPIndividual) i.clone();
+      i.Program.ReplaceSubtree(which, newtree);
+    }
 
     return i;
   }
@@ -735,7 +745,6 @@ abstract public class PushGP extends GA
     System.out.println("Executing program: " + p);
 
     Interpreter interpreter = _interpreter.clone();
-    i.Program.setInterpreter(interpreter);
 
     EvaluateTestCase(i, test._input, test._output);
 
@@ -748,7 +757,6 @@ abstract public class PushGP extends GA
   {
     PushGPIndividual i = new PushGPIndividual(p);
     Interpreter interpreter = _interpreter.clone();
-    i.Program.setInterpreter(interpreter);
 
     System.out.println("Executing program: " + p);
 

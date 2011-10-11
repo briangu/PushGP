@@ -93,7 +93,7 @@ public class CEFloatSymbolicRegression extends PushGP
     else
     {
       // Get test cases from test-cases.
-      Program caselist = new Program(_interpreter, cases);
+      Program caselist = new Program(cases);
 
       for (int i = 0; i < caselist.size(); i++)
       {
@@ -305,7 +305,7 @@ public class CEFloatSymbolicRegression extends PushGP
           if (trialSize > 0)
           {
             int pointIndex = _RNG.nextInt(trialSize);
-            trial.Program.ReplaceSubtree(pointIndex, new Program(_interpreter));
+            trial.Program.ReplaceSubtree(pointIndex, new Program());
             trial.Program.Flatten(pointIndex);
             madeSimpler = true;
           }

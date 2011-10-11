@@ -78,7 +78,7 @@ public class IntSymbolicRegression extends PushGP
     else
     {
       // Get test cases from test-cases.
-      Program caselist = new Program(_interpreter, cases);
+      Program caselist = new Program(cases);
 
       for (int i = 0; i < caselist.size(); i++)
       {

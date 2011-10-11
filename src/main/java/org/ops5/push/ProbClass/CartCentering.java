@@ -49,7 +49,7 @@ public class CartCentering extends PushGP
 
     String cases = GetParam("test-cases");
 
-    Program caselist = new Program(_interpreter, cases);
+    Program caselist = new Program(cases);
 
     for (int i = 0; i < caselist.size(); i++)
     {

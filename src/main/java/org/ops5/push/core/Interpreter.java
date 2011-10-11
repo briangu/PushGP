@@ -190,7 +190,7 @@ public class Interpreter implements Serializable
 
     clone._useFrames = _useFrames;
 
-    Program instructionList = new Program(clone);
+    Program instructionList = new Program();
     _inInstructionList.CopyTo(instructionList);
     clone.SetInstructions(instructionList);
     clone.SetRandomParameters(_minRandomInt,
@@ -230,7 +230,7 @@ public class Interpreter implements Serializable
   public void SetInstructions(Program inInstructionList)
       throws RuntimeException
   {
-    _inInstructionList = new Program(this);
+    _inInstructionList = new Program();
     inInstructionList.CopyTo(_inInstructionList);
 
     _randomGenerators.clear();
@@ -823,7 +823,7 @@ public class Interpreter implements Serializable
 
   public Program RandomCode(int inSize)
   {
-    Program p = new Program(this);
+    Program p = new Program();
 
     List<Integer> distribution = RandomCodeDistribution(inSize - 1, inSize - 1);
 
